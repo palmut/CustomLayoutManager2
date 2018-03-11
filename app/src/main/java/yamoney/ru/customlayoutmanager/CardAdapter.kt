@@ -1,6 +1,5 @@
 package yamoney.ru.customlayoutmanager
 
-import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -29,8 +28,9 @@ class CardAdapter : RecyclerView.Adapter<CardViewHolder>() {
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         val card = items[position]
-        (holder.itemView as CardView).apply {
+        (holder.itemView as SampleCardView).apply {
             setCardBackgroundColor(card.color)
+            setTitle(card.id.toString())
         }
     }
 

@@ -30,11 +30,21 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin_top"
         android:layout_gravity="bottom|end"
-        app:srcCompat="@drawable/ic_add_circle_black_24dp"/>
+        app:srcCompat="@drawable/ic_add_circle_24dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabShuffle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_gravity="bottom|end"
+        app:srcCompat="@drawable/ic_shuffle_24dp"/>
 
 </android.support.design.widget.CoordinatorLayout>
