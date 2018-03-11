@@ -1,5 +1,6 @@
 package yamoney.ru.customlayoutmanager
 
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -7,10 +8,23 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 
 class CardAdapter : RecyclerView.Adapter<CardViewHolder>() {
 
-    var items: MutableList<Card> = mutableListOf()
+    var items: List<Card> = listOf()
         set(value) {
-            field = value
-            notifyDataSetChanged()
+            val oldList = field
+            field = value.toList()
+            DiffUtil.calculateDiff(object : DiffUtil.Callback() {
+
+                override fun getOldListSize() = oldList.size
+
+                override fun getNewListSize() = field.size
+
+                override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+                        oldList[oldItemPosition] == field[newItemPosition]
+
+                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+                        oldList[oldItemPosition].id == field[newItemPosition].id
+
+            }).dispatchUpdatesTo(this)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
