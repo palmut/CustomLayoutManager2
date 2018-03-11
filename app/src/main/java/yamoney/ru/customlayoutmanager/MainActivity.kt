@@ -1,5 +1,6 @@
 package yamoney.ru.customlayoutmanager
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -18,32 +19,43 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fabAdd.setOnClickListener { view ->
-            with(items) {
-                add(Card(size, Random().nextInt()))
-            }
+        fabAdd.setOnClickListener {
+            generateCards(1)
             cardAdapter.items = items
+            recyclerView.smoothScrollToPosition(items.size - 1)
         }
 
-        fabShuffle.setOnClickListener { view ->
+        fabShuffle.setOnClickListener {
             items.shuffle()
             cardAdapter.items = items
         }
 
-        recyclerView.adapter = cardAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        with(recyclerView) {
+            itemAnimator = SampleItemAnimator()
+            adapter = cardAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+
+    }
+
+    private fun generateCards(count: Int) {
+        val rand = Random(System.currentTimeMillis())
+        (0 until count).forEach {
+            val alpha = 0xff
+            val red = rand.nextInt(255)
+            val green = rand.nextInt(255)
+            val blue = rand.nextInt(255)
+            val color = Color.argb(alpha, red, green, blue)
+            items.add(Card(items.size, color))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
