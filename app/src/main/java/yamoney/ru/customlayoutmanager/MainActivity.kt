@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         with(recyclerView) {
             itemAnimator = SampleItemAnimator()
             adapter = cardAdapter
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = SampleLayoutManager()
         }
 
     }
