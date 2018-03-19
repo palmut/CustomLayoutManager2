@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         with(recyclerView) {
             itemAnimator = SampleItemAnimator()
+            addItemDecoration(ShiftDecoration(resources.getDimensionPixelSize(R.dimen.padding)))
             adapter = cardAdapter
             layoutManager = SampleLayoutManager()
         }
