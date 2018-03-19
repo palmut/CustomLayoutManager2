@@ -11,7 +11,6 @@ class ShiftDecoration(val shift: Int) : RecyclerView.ItemDecoration() {
         val position = parent.getChildAdapterPosition(view)
         val left = shift * (position % 2)
         val right = shift * ((position + 1) % 2)
-        Log.d("LOG", "getItemOffsets: position=$position left=$left right=$right")
         outRect.set(left, 0, right, 0)
     }
 }
