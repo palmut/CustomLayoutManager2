@@ -18,7 +18,7 @@ abstract class ViewAnimation(
 
     val isEmpty get() = animations.isEmpty()
 
-    fun add(anim: SpringAnimation) {
+    private fun add(anim: SpringAnimation) {
         anim.addEndListener { animation, _, _, _ ->
             animations.remove(animation)
             checkFinished()

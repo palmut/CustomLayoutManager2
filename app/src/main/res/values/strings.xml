@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">CustomLayoutManager</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_list">List</string>
 </resources>

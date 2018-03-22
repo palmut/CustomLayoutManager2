@@ -1,13 +1,16 @@
 package yamoney.ru.customlayoutmanager
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
+import kotlinx.android.synthetic.main.activity_main.fabAdd
+import kotlinx.android.synthetic.main.activity_main.fabShuffle
+import kotlinx.android.synthetic.main.activity_main.recyclerView
+import kotlinx.android.synthetic.main.activity_main.toolbar
+import java.util.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -58,7 +61,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_settings -> {
+                startActivity(Intent(this, SampleListActivity::class.java))
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
