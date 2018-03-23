@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         fabAdd.setOnClickListener {
             generateCards(1)
             cardAdapter.items = items
-            recyclerView.smoothScrollToPosition(items.size - 1)
         }
 
         fabShuffle.setOnClickListener {
@@ -35,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
         with(recyclerView) {
             itemAnimator = SampleItemAnimator()
-            addItemDecoration(ShiftDecoration(resources.getDimensionPixelSize(R.dimen.padding)))
             adapter = cardAdapter
             layoutManager = SampleLayoutManager()
         }

@@ -1,5 +1,6 @@
 package yamoney.ru.customlayoutmanager
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
@@ -13,6 +14,8 @@ import kotlinx.android.synthetic.main.activity_sample_list.recyclerView
 import kotlinx.android.synthetic.main.activity_sample_list.toolbar
 
 class SampleListActivity : AppCompatActivity() {
+
+    private val listAdapter = ListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,14 +31,23 @@ class SampleListActivity : AppCompatActivity() {
                             ResourcesCompat.getColor(resources, R.color.colorPrimary, theme)
                     )
             )
-            adapter = ListAdapter()
+            addItemDecoration(
+                    StickyHeadersDecoration(
+                            resources.getDimensionPixelSize(R.dimen.headerHeight),
+                            Color.WHITE,
+                            ResourcesCompat.getColor(resources, R.color.colorPrimaryDark, theme),
+                            resources.getDimension(R.dimen.headerTextSize),
+                            listAdapter
+                    )
+            )
+            adapter = listAdapter
         }
     }
 }
 
 class ListItemViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-class ListAdapter : RecyclerView.Adapter<ListItemViewHolder>() {
+class ListAdapter : RecyclerView.Adapter<ListItemViewHolder>(), StickyHeaderAdapter {
 
     private val items = Array(100) { "Item ${it + 1}" }
 
@@ -50,5 +62,7 @@ class ListAdapter : RecyclerView.Adapter<ListItemViewHolder>() {
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
         (holder.itemView as TextView).text = items[position]
     }
+
+    override fun getHeader(position: Int) = "Header ${position / 4}"
 
 }
